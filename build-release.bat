@@ -1,5 +1,8 @@
 del export_pass_ci.7z
 rmdir "export_pass_ci" /S /Q
+rmdir "export_pass_ci.build" /S /Q
+rmdir "export_pass_ci.dist" /S /Q
+rmdir "export_pass_ci.onefile-build" /S /Q
 python -m nuitka --onefile --windows-console-mode=force .\export_pass_ci.py
 mkdir export_pass_ci
 copy README.MD export_pass_ci

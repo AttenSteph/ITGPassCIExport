@@ -1,5 +1,7 @@
 import argparse
 from pathlib import Path
+from sys import exit
+
 import pandas as pd
 import requests
 
@@ -107,7 +109,7 @@ new_passwords_columns = ["resource-url", "name", "assigned-technician", "correct
 if args.list_organizations is True:
     organizations = all_orgs_id_names_dic()
     print_dic_sorted_by_values(organizations)
-    exit()
+    exit(0)
 
 # -a, --all-organizations
 if args.all_organizations is True:
@@ -134,7 +136,7 @@ if args.all_organizations is True:
 
         # write Excel spreadsheet
         write_excel_file(organization_file_name, configs, passwords)
-    exit()
+    exit(0)
 
 # -i, --id
 if len(args.id) == 7 and int(args.id) >= 0:
@@ -150,6 +152,7 @@ if len(args.id) == 7 and int(args.id) >= 0:
 
     # write Excel spreadsheet
     write_excel_file(organization_file_name, configs, passwords)
-    exit()
+    exit(0)
 else:
     print("Organization ID is not a valid 7 digit number.")
+    exit(1)

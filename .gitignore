@@ -1,2 +1,7 @@
 .venv
-.export_data
+export_data
+export_pass_ci
+export_pass_ci.build
+export_pass_ci.dist
+export_pass_ci.onefile-build
+export_pass_ci.7z
