@@ -65,6 +65,7 @@ def write_excel_file(org_file_name, df_configs, df_passwords):
     with pd.ExcelWriter('./export_data/' + org_file_name + '.xlsx') as writer:
         df_configs.to_excel(writer, sheet_name='configs', index=False)
         df_passwords.to_excel(writer, sheet_name='passwords', index=False)
+    print("\tWrote data to: ./export_data/" + org_file_name + ".xlsx")
 
 
 # command line parser
@@ -133,7 +134,6 @@ if args.all_organizations is True:
 
         # write Excel spreadsheet
         write_excel_file(organization_file_name, configs, passwords)
-        print("\tWrote data to " + organization_file_name)
     exit()
 
 # -i, --id
@@ -141,16 +141,15 @@ if len(args.id) == 7 and int(args.id) >= 0:
     ("Querying API for " + str(args.id) + " ...")
     # get org name
     organization_name, organization_file_name = id2org_name(args.id)
-    print("\t" + str(args.id) + " is " + organization_name + ".")
+    print(str(args.id) + " is " + organization_name + ". Querying for:")
 
-    print("Querying API for " + organization_name + " configurations...")
+    print("\t" + organization_name + " configurations...")
     configs = make_df(args.id, "configs", configs_drop_list, new_configs_columns)
-    print("Querying API for " + organization_name + " passwords...")
+    print("\t" + organization_name + " passwords...")
     passwords = make_df(args.id, "passwords", passwords_drop_list, new_passwords_columns)
 
     # write Excel spreadsheet
     write_excel_file(organization_file_name, configs, passwords)
-    print("Wrote data to " + organization_file_name)
     exit()
 else:
     print("Organization ID is not a valid 7 digit number.")
