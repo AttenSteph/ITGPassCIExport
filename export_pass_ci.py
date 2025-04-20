@@ -41,7 +41,11 @@ def get_request_as_df(api_url):
 
 def drop_df_columns(df, drop_list):
     for column_name in drop_list:
-        df = df.drop([column_name], axis=1)
+        try:
+            df = df.drop([column_name], axis=1)
+        except Exception as e:
+            print(f"\tAn unexpected error occurred: {e}")
+            continue
     return df
 
 
